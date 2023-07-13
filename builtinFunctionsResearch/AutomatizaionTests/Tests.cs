@@ -24,4 +24,11 @@ public class Tests
         string ctzwAssembly = File.ReadAllText(path + "\\sFiles\\ctzw.s");
         Assert.That(ctzwAssembly.Contains("ctzw"));
     }
+
+    [Test]
+    public void rev8ShouldBePresent()
+    {
+        string rev8Assembly = File.ReadAllText(path + "\\sFiles\\rev8.s");
+        Assert.That(rev8Assembly.Contains("rev8"));
+    }
 }
