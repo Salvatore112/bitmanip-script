@@ -1,4 +1,4 @@
-cd ./cFiles
+cd "$1"
 ls
 
 for folder in ./*
@@ -6,7 +6,7 @@ do
     cd "$folder"
     for cFile in ./*.c
     do
-    /home/pasha/x-tools/riscv64-unknown-elf/bin/riscv64-unknown-elf-gcc -march=rv64gc_zba_zbb_zbc_zbs "$cFile" "$1" -S 
+    /home/pasha/x-tools/riscv64-unknown-elf/bin/riscv64-unknown-elf-gcc -march=rv64gc_zba_zbb_zbc_zbs "$cFile" "$2" -S 
     done
     cd ".."
 done
