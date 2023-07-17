@@ -1,5 +1,4 @@
 cd "$1"
-ls
 
 for folder in ./*
 do
