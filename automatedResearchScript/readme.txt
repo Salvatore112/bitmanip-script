@@ -1,3 +1,5 @@
 How to use the script: 
 
-Type bash script.sh [OptimizationLevel] [PathOfFolderContainingCFiles]
+1. Go to the folder containing the script
+
+2. Type in the terminal: bash script.sh [OptimizationLevel] [PathOfFolderContainingCFiles]
