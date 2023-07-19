@@ -19,8 +19,6 @@ do
         instructionName="${ADDR[0]}"
         instructionName="${instructionName:2}"
 
-        echo "$instructionName"
-
         assemblyText=$( cat "$assemblyFile" ) 
         instructions=("cpopw" "add.uw" "andn" "clmul" "clmulh" "clmulr" "clz" "clzw" \
                       "cpop" "ctz" "ctzw" "max" "rev8" "maxu" "min" "minu" "orc.b" \
