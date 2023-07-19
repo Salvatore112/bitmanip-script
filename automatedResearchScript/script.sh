@@ -20,7 +20,7 @@ do
         for instruction in "${instructions[@]}"
         do
             if echo "$assemblyText" | grep -q -w "$instruction"; then
-                echo "$key was found in $assemblyFile";
+                echo "$instruction was found in $assemblyFile";
             fi
         done
     done
