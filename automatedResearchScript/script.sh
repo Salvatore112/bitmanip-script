@@ -13,9 +13,21 @@ do
 
     for assemblyFile in ./*.s
     do
-    
+
+        IFS='_' read -ra ADDR <<< "$assemblyFile"
+
+        instructionName="${ADDR[0]}"
+        instructionName="${instructionName:2}"
+
+        echo "$instructionName"
+
         assemblyText=$( cat "$assemblyFile" ) 
-        instructions=("cpopw" "add.uw" "andn" "clmul" "clmulh" "clmulr" "clz" "clzw" "cpop" "ctz" "ctzw" "max" "rev8" "maxu" "min" "minu" "orc.b" "orn" "rol" "rolw" "ror" "rori" "roriw" "rorw" "bclr" "bclri" "bext" "bexti" "binv" "binvi" "bset" "bseti" "sext.b" "sext.h" "sh1add" "sh1add.uw" "sh2add" "sh2add.uw" "sh3add" "sh3add.uw" "slli.uw" "xnor" "zext.h")
+        instructions=("cpopw" "add.uw" "andn" "clmul" "clmulh" "clmulr" "clz" "clzw" \
+                      "cpop" "ctz" "ctzw" "max" "rev8" "maxu" "min" "minu" "orc.b" \
+                      "orn" "rol" "rolw" "ror" "rori" "roriw" "rorw" "bclr" "bclri" \
+                      "bext" "bexti" "binv" "binvi" "bset" "bseti" "sext.b" "sext.h" \
+                      "sh1add" "sh1add.uw" "sh2add" "sh2add.uw" "sh3add" "sh3add.uw" \
+                      "slli.uw" "xnor" "zext.h")
 
         for instruction in "${instructions[@]}"
         do
