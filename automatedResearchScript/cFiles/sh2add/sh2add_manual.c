@@ -1,24 +1,24 @@
-#include<stdio.h>
+#include <stdint.h>
 
-int test1(int rs1, int rs2) {
+uint64_t test1(uint64_t rs1, uint64_t rs2) {
     rs2 += (rs1 << 2);
     return rs2;
 }
 
-int test2(int rs1, int rs2) {
+uint64_t test2(uint64_t rs1, uint64_t rs2) {
     return rs2 + (rs1 << 2);
 }
 
-int test3(int rs1, int rs2) {
+uint64_t test3(uint64_t rs1, uint64_t rs2) {
     return (rs1 << 2) + rs2;
 }
 
-int test4(int rs1, int rs2) {
-    int rs3 = rs2 + (rs1 << 2);
+uint64_t test4(uint64_t rs1, uint64_t rs2) {
+    uint64_t rs3 = rs2 + (rs1 << 2);
     return rs3;
 }
 
-int test5(int rs1, int rs2) {
-    int rs3 = (rs1 << 2) + rs2;
+uint64_t test5(uint64_t rs1, uint64_t rs2) {
+    uint64_t rs3 = (rs1 << 2) + rs2;
     return rs3;
 }

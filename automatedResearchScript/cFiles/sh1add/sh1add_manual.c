@@ -1,5 +1,5 @@
-#include<stdio.h>
+#include <stdint.h>
 
-int test(int rs1, int rs2) {
+uint32_t test(uint32_t rs1, uint32_t rs2) {
     return (rs1 << 1) + rs2;
 }

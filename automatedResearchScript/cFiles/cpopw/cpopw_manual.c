@@ -1,5 +1,3 @@
-#include<stdio.h>
-
 int cpopw_manual(int input) {
     int count = 0;
     if ((input & 1) != 0) {
@@ -11,8 +9,4 @@ int cpopw_manual(int input) {
         }
     }
     return count;
-}
-
-int main() {
-    printf("%i \n", cpopw_manual(124));
 }

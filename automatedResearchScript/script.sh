@@ -1,38 +1,55 @@
 #!/bin/bash -e
 cd "$1"
 
+GREEN='\033[0;32m' 
+RED='\033[0;31m' 
+NC='\033[0m'
+
+filesTotal=0
+instructionsFound=0
+
+toolChain="w"
+
+if echo "$2" | grep -q -w "gcc"; then
+    toolChain="$2 -march=rv64gc_zba_zbb_zbc_zbs $3 -S";
+else 
+    toolChain="$2  --target=riscv64-unknown-elf -march=rv64gc_zba_zbb_zbc_zbs $3 -S"
+fi
+
 for folder in ./*
 do
     cd "$folder"
     
     for cFile in ./*.c
     do
-       /home/pasha/x-tools/riscv64-unknown-elf/bin/riscv64-unknown-elf-gcc \
-        -march=rv64gc_zba_zbb_zbc_zbs "$cFile" "$2" -S 
+        $toolChain "$cFile"
     done
 
     for assemblyFile in ./*.s
     do
-
-        IFS='_' read -ra ADDR <<< "$assemblyFile"
+        filesTotal=$((filesTotal+1))
+        IFS='_' read -a ADDR <<< "$assemblyFile"
 
         instructionName="${ADDR[0]}"
         instructionName="${instructionName:2}"
 
         assemblyText=$( cat "$assemblyFile" ) 
-        instructions=("cpopw" "add.uw" "andn" "clmul" "clmulh" "clmulr" "clz" "clzw" \
-                      "cpop" "ctz" "ctzw" "max" "rev8" "maxu" "min" "minu" "orc.b" \
-                      "orn" "rol" "rolw" "ror" "rori" "roriw" "rorw" "bclr" "bclri" \
-                      "bext" "bexti" "binv" "binvi" "bset" "bseti" "sext.b" "sext.h" \
-                      "sh1add" "sh1add.uw" "sh2add" "sh2add.uw" "sh3add" "sh3add.uw" \
-                      "slli.uw" "xnor" "zext.h")
-
-        for instruction in "${instructions[@]}"
-        do
-            if echo "$assemblyText" | grep -q -w "$instruction"; then
-                echo "$instruction was found in $assemblyFile";
-            fi
-        done
+        
+        if echo "$assemblyText" | grep -q -w "$instructionName"; then
+            echo -e "${GREEN}$instructionName was found in $assemblyFile ${NC}\n";
+            instructionsFound=$((instructionsFound+1))
+        else
+            echo -e "${RED}$instructionName was not found in $assemblyFile ${NC}\n";
+        fi
     done
     cd ".."
 done
+
+cd ".."
+
+summary="Architecture, placeholder
+Compiler, $2
+Optimization level, $3 
+Assembly files with bitmanip instrcutions, $instructionsFound out of $filesTotal"
+
+echo "$summary" > results.txt

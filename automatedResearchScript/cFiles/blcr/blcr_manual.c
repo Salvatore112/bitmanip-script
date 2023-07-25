@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdint.h>
 
 int32_t test(int32_t rs1Value, int index) {
