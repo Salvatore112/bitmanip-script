@@ -20,7 +20,6 @@ while getopts ":h" option; do
    esac
 done
 
-
 echo "Microarchitecture, $3
 Compiler, $1
 Optimization level, $2" > results.txt
@@ -60,11 +59,11 @@ do
         assemblyText=$( cat "$assemblyFile" ) 
         
         if echo "$assemblyText" | grep -q -w "$instructionName"; then
-            echo -e "${GREEN}$instructionName was found in $assemblyFile ${NC}\n";
+            echo -e "${GREEN}$assemblyFile, passed${NC}\n";
             instructionsFound=$((instructionsFound+1))
             echo "$assemblyFile, passed" >> ../../results.txt
         else
-            echo -e "${RED}$instructionName was not found in $assemblyFile ${NC}\n";
+            echo -e "${RED}$assemblyFile, not passed${NC}\n";
             echo "$assemblyFile, not passed" >> ../../results.txt
         fi
     done
@@ -72,5 +71,7 @@ do
 done
 
 cd ".."
+
+echo "Tests passed, $instructionsFound out of $filesTotal"
 
 echo "Assembly files with bitmanip instrcutions, $instructionsFound out of $filesTotal" >> results.txt
