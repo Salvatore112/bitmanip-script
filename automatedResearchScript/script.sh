@@ -1,4 +1,26 @@
 #!/bin/bash -e
+
+Help()
+{
+   # Display Help
+   echo "Script help."
+   echo
+   echo "Syntax: ./script.sh <compiler> <optimization_flag> <microarchitecture_flag>"
+   echo "<compiler> - path to a compiler"
+   echo "<optimization_flag> - level of optimization (one should use a flag, i'e "-O3" or "-O0")"
+   echo "<microarchitecture_flag> - target's microarchitecture_flag (one should use a flag, i.e "-march=riscv64")"
+   echo
+}
+
+while getopts ":h" option; do
+   case $option in
+      h) # display Help
+         Help
+         exit;;
+   esac
+done
+
+
 echo "Microarchitecture, $3
 Compiler, $1
 Optimization level, $2" > results.txt
