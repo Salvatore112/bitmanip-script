@@ -30,7 +30,7 @@ do
     for assemblyFile in ./*.s
     do
         filesTotal=$((filesTotal+1))
-        IFS='_' read -a ADDR <<< "$assemblyFile"
+        IFS='_' read -r -a ADDR <<< "$assemblyFile"
 
         instructionName="${ADDR[0]}"
         instructionName="${instructionName:2}"
