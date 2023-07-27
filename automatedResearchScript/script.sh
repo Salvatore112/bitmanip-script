@@ -1,5 +1,5 @@
 #!/bin/bash -e
-echo "Architecture, $3
+echo "Microarchitecture, $3
 Compiler, $1
 Optimization level, $2" > results.txt
 
@@ -40,10 +40,10 @@ do
         if echo "$assemblyText" | grep -q -w "$instructionName"; then
             echo -e "${GREEN}$instructionName was found in $assemblyFile ${NC}\n";
             instructionsFound=$((instructionsFound+1))
-            echo "$assemblyFile, passed" >> results.txt
+            echo "$assemblyFile, passed" >> ../../results.txt
         else
             echo -e "${RED}$instructionName was not found in $assemblyFile ${NC}\n";
-            echo "$assemblyFile, not passed" >> results.txt
+            echo "$assemblyFile, not passed" >> ../../results.txt
         fi
     done
     cd ".."
