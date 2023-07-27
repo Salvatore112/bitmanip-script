@@ -1,8 +1,9 @@
-name: script build
+name: script check
 
 on: [push]
 
-	@@ -7,24 +7,8 @@ jobs:
+jobs:
+  build-ubuntu:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
