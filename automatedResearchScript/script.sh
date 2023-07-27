@@ -51,5 +51,4 @@ done
 
 cd ".."
 
-
 echo "Assembly files with bitmanip instrcutions, $instructionsFound out of $filesTotal" >> results.txt
