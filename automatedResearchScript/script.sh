@@ -1,5 +1,9 @@
 #!/bin/bash -e
-cd "$1"
+echo "Architecture, $3
+Compiler, $1
+Optimization level, $2" > results.txt
+
+cd "./cFiles"
 
 GREEN='\033[0;32m' 
 RED='\033[0;31m' 
@@ -8,12 +12,10 @@ NC='\033[0m'
 filesTotal=0
 instructionsFound=0
 
-toolChain="w"
-
-if echo "$2" | grep -q -w "gcc"; then
-    toolChain="$2 -march=rv64gc_zba_zbb_zbc_zbs $3 -S";
+if echo "$1" | grep -q -w "gcc"; then
+    toolChain="$1 $3 $2 -S";
 else 
-    toolChain="$2  --target=riscv64-unknown-elf -march=rv64gc_zba_zbb_zbc_zbs $3 -S"
+    toolChain="$1  --target=riscv64-unknown-elf $3 $2 -S"
 fi
 
 for folder in ./*
@@ -38,8 +40,10 @@ do
         if echo "$assemblyText" | grep -q -w "$instructionName"; then
             echo -e "${GREEN}$instructionName was found in $assemblyFile ${NC}\n";
             instructionsFound=$((instructionsFound+1))
+            echo "$assemblyFile, passed" >> results.txt
         else
             echo -e "${RED}$instructionName was not found in $assemblyFile ${NC}\n";
+            echo "$assemblyFile, not passed" >> results.txt
         fi
     done
     cd ".."
@@ -47,9 +51,5 @@ done
 
 cd ".."
 
-summary="Architecture, placeholder
-Compiler, $2
-Optimization level, $3 
-Assembly files with bitmanip instrcutions, $instructionsFound out of $filesTotal"
 
-echo "$summary" > results.txt
+echo "Assembly files with bitmanip instrcutions, $instructionsFound out of $filesTotal" >> results.txt
