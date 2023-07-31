@@ -8,6 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Get_Shellcheck
-        run: apt-get install shellcheck
+        run: sudo apt-get install shellcheck
       - name: Build
         run: for f in $(find . -name "*.sh"); do shellcheck $f; done

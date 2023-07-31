@@ -1,0 +1,4 @@
+1. max is generated with any optimization levels
+
+2.  cpopw generates an extra andi using gcc 13.0.1
+
